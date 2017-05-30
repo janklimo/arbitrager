@@ -79,6 +79,7 @@ GEM
       xpath (~> 2.0)
     case_transform (0.2)
       activesupport
+    chartkick (2.2.3)
     childprocess (0.6.3)
       ffi (~> 1.0, >= 1.0.11)
     cliver (0.3.2)
@@ -328,6 +329,7 @@ DEPENDENCIES
   bundler-audit
   byebug
   capybara (~> 2.13.0)
+  chartkick
   devise (~> 4.3.0)
   draper (~> 3.0.0)
   factory_girl_rails
