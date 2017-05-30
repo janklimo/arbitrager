@@ -66,6 +66,8 @@ gem 'high_voltage', '~> 3.0.0'
 # Security
 gem 'secure_headers', require: false
 
+gem 'httparty'
+
 group :production do
   # Remove this if the app is not hosted on Heroku
   gem 'heroku-deflater'
