@@ -31,4 +31,13 @@ task get_data: :environment do
   puts "Current arbitrage spread is #{difference_thb} THB "\
     "(#{number_to_percentage(difference_percentage)})."
   puts "=========================================================="
+
+  Record.create(
+    price_bx_thb: price_bx_thb,
+    price_kraken_usd: price_kraken_usd,
+    price_kraken_thb: price_kraken_thb,
+    difference_thb: difference_thb,
+    difference_percentage: difference_percentage,
+    exchange_rate: exchange_rate
+  )
 end
