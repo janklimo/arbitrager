@@ -11,5 +11,9 @@ class PagesController < ApplicationController
     @btc_series = Record.btc.order(created_at: :desc).limit(120).map do |record|
       [record.created_at.strftime("%b %d, %Y %H:%M"), record.difference_thb]
     end
+
+    @xrp_series = Record.xrp.order(created_at: :desc).limit(120).map do |record|
+      [record.created_at.strftime("%b %d, %Y %H:%M"), record.difference_thb]
+    end
   end
 end

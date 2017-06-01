@@ -3,7 +3,8 @@ require 'httparty'
 
 MAPPINGS = {
   btc: ['1', 'XBTUSD', 'XXBTZUSD'],
-  eth: ['21', 'ETHUSD', 'XETHZUSD']
+  eth: ['21', 'ETHUSD', 'XETHZUSD'],
+  xrp: ['25', 'XRPUSD', 'XXRPZUSD']
 }
 
 def bx_price(ticker, data)
@@ -60,7 +61,7 @@ task get_data: :environment do
   resp = HTTParty.get("https://bx.in.th/api/")
   parsed_bx_data = JSON.parse(resp.body)
 
-  [:btc, :eth].each do |symbol|
+  [:btc, :eth, :xrp].each do |symbol|
     save_data_for(symbol, parsed_bx_data, exchange_rate)
   end
 end

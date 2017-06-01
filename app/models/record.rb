@@ -1,3 +1,3 @@
 class Record < ApplicationRecord
-  enum ticker: [ :eth, :btc ]
+  enum ticker: [ :eth, :btc, :xrp ]
 end
