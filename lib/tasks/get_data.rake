@@ -8,7 +8,7 @@ MAPPINGS = {
 
 def bx_price(ticker, data)
   key = MAPPINGS[ticker].first
-  data[key]['last_price'].to_f
+  data[key]['orderbook']['bids']['highbid'].to_f
 end
 
 def kraken_price(ticker)
