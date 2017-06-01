@@ -55,7 +55,8 @@ task get_data: :environment do
   begin
     exchange_rate = page.css('.table-foreignexchange2 tr.bg-gray').first.css('td').last.text.to_f
   rescue NoMethodError
-    exchange_rate = 0
+    puts "BOT is not loading :/"
+    return
   end
 
   resp = HTTParty.get("https://bx.in.th/api/")
