@@ -1,0 +1,10 @@
+<h1>Good news!</h1>
+<p>The following trading opportunities have been identified:</p>
+<ul>
+<% @opportunities_hash.each do |k, v| %>
+  <li>
+    <b><%= k.upcase  %></b>:
+    THB value is <%= number_to_percentage(v) %> higher than the USD equivalent.
+  </li>
+<% end %>
+</ul>

@@ -20,6 +20,7 @@
 
 # RubyMine settings
 .idea/
+.rbenv-vars
 
 # Figaro
 config/application.yml

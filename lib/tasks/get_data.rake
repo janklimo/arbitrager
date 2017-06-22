@@ -2,7 +2,7 @@ require 'open-uri'
 require 'httparty'
 
 class Tracker
-  attr_reader :exchange_rate
+  attr_reader :exchange_rate, :opportunities
 
   include ActionView::Helpers::NumberHelper
 
@@ -23,6 +23,7 @@ class Tracker
 
     resp = HTTParty.get("https://bx.in.th/api/")
     @bx_data = JSON.parse(resp.body)
+    @opportunities = {}
   end
 
   def bx_price(ticker)
@@ -63,6 +64,10 @@ class Tracker
       difference_percentage: difference_percentage,
       exchange_rate: @exchange_rate
     )
+
+    if difference_percentage > ENV.fetch('TRIGGER').to_f
+      @opportunities[ticker] = difference_percentage
+    end
   end
 end
 
@@ -74,5 +79,9 @@ task get_data: :environment do
 
   [:btc, :eth, :xrp].each do |symbol|
     tracker.save_data_for(symbol)
+  end
+
+  unless tracker.opportunities.empty?
+    Notifier.trade_opportunity(tracker.opportunities).deliver_now
   end
 end
