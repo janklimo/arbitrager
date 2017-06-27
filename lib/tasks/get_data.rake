@@ -84,4 +84,8 @@ task get_data: :environment do
   unless tracker.opportunities.empty?
     Notifier.trade_opportunity(tracker.opportunities).deliver_now
   end
+
+  # DB is limited to 10,000 rows
+  # 2,965 records are created in a week
+  Record.where("created_at < ?", 3.weeks.ago).destroy_all
 end
