@@ -7,9 +7,26 @@ class Tracker
   include ActionView::Helpers::NumberHelper
 
   MAPPINGS = {
-    btc: ['1', 'XBTUSD', 'XXBTZUSD'],
-    eth: ['21', 'ETHUSD', 'XETHZUSD'],
-    xrp: ['25', 'XRPUSD', 'XXRPZUSD']
+    btc: {
+      bx_pairing_id: '1',
+      kraken_pair: 'XBTUSD',
+      kraken_ticker: 'XXBTZUSD'
+    },
+    eth: {
+      bx_pairing_id: '21',
+      kraken_pair: 'ETHUSD',
+      kraken_ticker: 'XETHZUSD'
+    },
+    xrp: {
+      bx_pairing_id: '25',
+      kraken_pair: 'XRPUSD',
+      kraken_ticker: 'XXRPZUSD'
+    },
+    dash: {
+      bx_pairing_id: '25',
+      kraken_pair: 'XRPUSD',
+      kraken_ticker: 'XXRPZUSD'
+    }
   }
 
   def initialize
@@ -27,15 +44,15 @@ class Tracker
   end
 
   def bx_price(ticker)
-    key = MAPPINGS[ticker].first
+    key = MAPPINGS[ticker][:bx_pairing_id]
     @bx_data[key]['orderbook']['bids']['highbid'].to_f
   end
 
   def kraken_price(ticker)
-    pair = MAPPINGS[ticker][1]
+    pair = MAPPINGS[ticker][:kraken_pair]
     resp = HTTParty.get("https://api.kraken.com/0/public/Ticker?pair=#{pair}")
     parsed = JSON.parse(resp.body)
-    key = MAPPINGS[ticker][2]
+    key = MAPPINGS[ticker][:kraken_ticker]
     parsed['result'][key]['a'][0].to_f
   end
 
@@ -75,9 +92,9 @@ task get_data: :environment do
   tracker = Tracker.new
 
   # retrieving exchange rate failed :/
-  return unless tracker.exchange_rate > 0
+  return unless tracker.exchange_rate.positive?
 
-  [:btc, :eth, :xrp].each do |symbol|
+  %i(btc eth xrp).each do |symbol|
     tracker.save_data_for(symbol)
   end
 
