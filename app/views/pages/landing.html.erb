@@ -70,5 +70,28 @@
         }) %>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Arbitrage opportunity: DASH</h2>
+        <br />
+        <div class="chart-container">
+          <%= bar_chart(@dash_series,
+                        library: {
+            style: { "height":"1000px"},
+            tooltip: {
+              pointFormat: "Value: {point.y:,.1f} THB"
+            },
+            yAxis: {
+              title: {
+                text: 'Price difference in THB'
+              }
+            },
+            chart: {
+              height: 1000
+            }
+          }) %>
+      </div>
+    </div>
   </div>
 </div>
