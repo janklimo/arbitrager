@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   def landing
     Tracker::MAPPINGS.keys.each do |key|
       value = Record.send(key).order(created_at: :desc).limit(120).map do |record|
-        [record.created_at.strftime("%b %d, %Y %H:%M"), record.difference_thb]
+        [record.created_at.strftime("%b %d, %Y %H:%M"), record.difference_percentage]
       end
 
       instance_variable_set("@#{key}_series", value)
