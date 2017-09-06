@@ -1,0 +1,20 @@
+<h1>Good news!</h1>
+<p>The following trading opportunities have been identified:</p>
+<ul>
+  <% @opportunities.each do |hash| %>
+    <li>
+      <b><%= hash['name'] %></b>:
+      <ul>
+        <li>
+          1h change: <%= hash['percent_change_1h'] %>%
+        </li>
+        <li>
+          24h change: <%= hash['percent_change_24h'] %>%
+        </li>
+        <li>
+          7d change: <%= hash['percent_change_7d'] %>%
+        </li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
