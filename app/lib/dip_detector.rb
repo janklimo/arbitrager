@@ -14,8 +14,8 @@ class DipDetector
       change_24h = hash['percent_change_24h'].to_f
       change_7d = hash['percent_change_7d'].to_f
 
-      (change_1h > 0) && (change_24h < ENV.fetch('TRIGGER_7H').to_f) &&
-        (change_7d < ENV.fetch('TRIGGER_24H').to_f)
+      (change_1h > 0) && (change_24h < ENV.fetch('TRIGGER_24H').to_f) &&
+        (change_7d < ENV.fetch('TRIGGER_7D').to_f)
     end
   end
 end
