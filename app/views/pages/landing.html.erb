@@ -93,5 +93,28 @@
           }) %>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Arbitrage opportunity: LTC</h2>
+        <br />
+        <div class="chart-container">
+          <%= bar_chart(@ltc_series,
+                        library: {
+            style: { "height":"1000px"},
+            tooltip: {
+              pointFormat: "Value: {point.y:,.3f} %"
+            },
+            yAxis: {
+              title: {
+                text: 'Price difference in %'
+              }
+            },
+            chart: {
+              height: 1000
+            }
+          }) %>
+      </div>
+    </div>
   </div>
 </div>

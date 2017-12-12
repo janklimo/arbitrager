@@ -26,7 +26,12 @@ class Tracker
       bx_pairing_id: '22',
       kraken_pair: 'DASHUSD',
       kraken_ticker: 'DASHUSD'
-    }
+    },
+    ltc: {
+      bx_pairing_id: '30',
+      kraken_pair: 'LTCUSD',
+      kraken_ticker: 'XLTCZUSD'
+    },
   }
 
   def initialize

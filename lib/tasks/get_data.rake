@@ -1,4 +1,8 @@
-task get_data: :environment do
+task get_data_and_notify: :environment do
+  # Detect dips
+  DipDetector.new.notify
+
+  # Track data
   tracker = Tracker.new
 
   # retrieving exchange rate failed :/
@@ -8,9 +12,7 @@ task get_data: :environment do
     tracker.save_data_for(symbol)
   end
 
-  unless tracker.opportunities.empty?
-    Notifier.trade_opportunity(tracker.opportunities).deliver_now
-  end
+  Notifier.trade_opportunity(tracker.opportunities).deliver_now
 
   # DB is limited to 10,000 rows
   # 576 records are created in a day

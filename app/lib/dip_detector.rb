@@ -10,6 +10,12 @@ class DipDetector
     @coin_data = JSON.parse(resp.body)
   end
 
+  def notify
+    Notifier.dip_detected(opportunities).deliver_now
+  end
+
+  private
+
   def opportunities
     coin_data.select do |hash|
       change_1h = hash['percent_change_1h'].to_f
