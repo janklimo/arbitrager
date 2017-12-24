@@ -12,9 +12,11 @@ task get_data_and_notify: :environment do
     tracker.save_data_for(symbol)
   end
 
-  Notifier.trade_opportunity(tracker.opportunities).deliver_now
+  if ENV['ARB'] == 'true'
+    Notifier.trade_opportunity(tracker.opportunities).deliver_now
+  end
 
   # DB is limited to 10,000 rows
   # 576 records are created in a day
-  Record.where("created_at < ?", 15.days.ago).destroy_all
+  Record.where("created_at < ?", 12.days.ago).destroy_all
 end
