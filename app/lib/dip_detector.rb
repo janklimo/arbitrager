@@ -6,7 +6,8 @@ class DipDetector
   BLACKLIST = %w(MIOTA XEM)
 
   def initialize
-    resp = HTTParty.get("https://api.coinmarketcap.com/v1/ticker/?limit=10")
+    limit = ENV['LIMIT']
+    resp = HTTParty.get("https://api.coinmarketcap.com/v1/ticker/?limit=#{limit}")
     @coin_data = JSON.parse(resp.body)
   end
 
